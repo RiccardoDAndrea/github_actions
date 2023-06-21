@@ -8,8 +8,7 @@ USERNAME = os.environ.get('USER_EMAIL')
 PASSWORD = os.environ.get('USER_PASSWORD')
 message = """\
 Subject: GitHub Email Report
-
-Ich versuhce es auch nochmal.
+Das ist eine Automatisierte Mail
 """
 
 context = ssl.create_default_context()
