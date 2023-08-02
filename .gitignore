@@ -120,6 +120,7 @@ celerybeat.pid
 *.sage.py
 
 # Environment
+vis_stocks/
 mail_venv/
 .env
 .venv
