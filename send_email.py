@@ -1,7 +1,7 @@
 import smtplib, ssl
 import os
-import pandas as pd
-import yfinance as yf
+# import pandas as pd
+#import yfinance as yf
 
 port = 465
 smtp_server = "smtp.gmail.com"
@@ -21,28 +21,28 @@ with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
 
 
 
-msft = yf.Ticker("MSFT")
-print(msft)
-"""
-returns
-<yfinance.Ticker object at 0x1a1715e898>
-"""
+# msft = yf.Ticker("MSFT")
+# print(msft)
+# """
+# returns
+# <yfinance.Ticker object at 0x1a1715e898>
+# """
 
-# get stock info
-msft.info
+# # get stock info
+# msft.info
 
-"""
-returns:
-{
- 'quoteType': 'EQUITY',
- 'quoteSourceName': 'Nasdaq Real Time Price',
- 'currency': 'USD',
- 'shortName': 'Microsoft Corporation',
- 'exchangeTimezoneName': 'America/New_York',
-  ...
- 'symbol': 'MSFT'
-}
-"""
+# """
+# returns:
+# {
+#  'quoteType': 'EQUITY',
+#  'quoteSourceName': 'Nasdaq Real Time Price',
+#  'currency': 'USD',
+#  'shortName': 'Microsoft Corporation',
+#  'exchangeTimezoneName': 'America/New_York',
+#   ...
+#  'symbol': 'MSFT'
+# }
+# """
 
-# get historical market data, here max is 5 years.
-msft.history(period="max")
+# # get historical market data, here max is 5 years.
+# msft.history(period="max")
