@@ -1,48 +1,37 @@
 import smtplib, ssl
 import os
-# import pandas as pd
-#import yfinance as yf
+import pandas as pd
+import yfinance as yf
+from datetime import datetime, timedelta
 
-port = 465
-smtp_server = "smtp.gmail.com"
-USERNAME = os.environ.get('USER_EMAIL')
-PASSWORD = os.environ.get('USER_PASSWORD')
-message = """\
-Subject: GitHub Email Report
-Das ist eine Automatisierte Mail
-"""
-
-context = ssl.create_default_context()
-with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-    server.login(USERNAME,PASSWORD)
-    server.sendmail(USERNAME,USERNAME,message)
-
-#### E N D _ S E N D I N G _ E - M A I L
-
-
-
-# msft = yf.Ticker("MSFT")
-# print(msft)
-# """
-# returns
-# <yfinance.Ticker object at 0x1a1715e898>
+# port = 465
+# smtp_server = "smtp.gmail.com"
+# USERNAME = os.environ.get('USER_EMAIL')
+# PASSWORD = os.environ.get('USER_PASSWORD')
+# message = """\
+# Subject: GitHub Email Report
+# Das ist eine Automatisierte Mail
 # """
 
-# # get stock info
-# msft.info
+# context = ssl.create_default_context()
+# with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+#     server.login(USERNAME,PASSWORD)
+#     server.sendmail(USERNAME,USERNAME,message)
 
-# """
-# returns:
-# {
-#  'quoteType': 'EQUITY',
-#  'quoteSourceName': 'Nasdaq Real Time Price',
-#  'currency': 'USD',
-#  'shortName': 'Microsoft Corporation',
-#  'exchangeTimezoneName': 'America/New_York',
-#   ...
-#  'symbol': 'MSFT'
-# }
-# """
+#### E N D _ S E N D I N G _ E - M A I L ####
 
-# # get historical market data, here max is 5 years.
-# msft.history(period="max")
+#### G E T _ S T O C K _ P R I C E S ####
+
+tickers = ['AAPL', 'BYDDF']
+
+end_date = datetime.today()
+
+start_date = end_date - timedelta(days = 2 * 365)
+
+close_df = pd.DataFrame()
+
+for ticker in tickers:
+    data = yf.download(ticker,start=start_date, end=end_date)
+    close_df[ticker] = data['Close']
+
+print(close_df)
