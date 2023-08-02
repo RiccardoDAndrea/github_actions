@@ -1,8 +1,8 @@
 name: daily-report
 
 on:
-  # schedule:
-  #   - cron: '0 12 * * 5'
+  schedule:
+    - cron: '0 12 * * 5'
   workflow_dispatch:
 
 jobs:
