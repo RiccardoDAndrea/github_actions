@@ -19,12 +19,6 @@ jobs:
         run: |
           pip install yfinance pandas matplotlib
 
-      # Weitere Abhängigkeiten für das Skript installieren
-      - name: Install additional dependencies
-        run: |
-          pip install smtplib
-          pip install email
-
       - name: Run email code
         env:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
