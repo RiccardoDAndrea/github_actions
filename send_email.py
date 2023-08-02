@@ -1,12 +1,12 @@
-import smtplib, ssl
-import os
-import pandas as pd
-import yfinance as yf
-from datetime import datetime, timedelta
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from matplotlib import pyplot as plt
-from io import BytesIO
+# import smtplib, ssl
+# import os
+# import pandas as pd
+# import yfinance as yf
+# from datetime import datetime, timedelta
+# from email.mime.text import MIMEText
+# from email.mime.multipart import MIMEMultipart
+# from matplotlib import pyplot as plt
+# from io import BytesIO
 
 # #### G E T _ S T O C K _ P R I C E S ####
 
