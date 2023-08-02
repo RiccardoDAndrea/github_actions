@@ -13,6 +13,18 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
+
+      # Neuer Schritt, um Abhängigkeiten zu installieren
+      - name: Install dependencies
+        run: |
+          pip install yfinance pandas matplotlib
+
+      # Weitere Abhängigkeiten für das Skript installieren
+      - name: Install additional dependencies
+        run: |
+          pip install smtplib
+          pip install email
+
       - name: Run email code
         env:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
