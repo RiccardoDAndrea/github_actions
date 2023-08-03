@@ -53,12 +53,12 @@ from io import BytesIO
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
 end_date = datetime.today()
-start_date = end_date - timedelta(days=2 * 365)
+start_date = end_date - timedelta(days= 2 * 365)
 
 close_df = pd.DataFrame()
 
 for ticker in tickers:
-    data = yf.download(ticker, start=start_date, end=end_date)
+    data = yf.download(ticker, start = start_date, end = end_date)
     close_df[ticker] = data['Close']
 
 close_df.reset_index(inplace=True)
