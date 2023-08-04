@@ -46,7 +46,7 @@ bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab
 plt.bar(tickers, percentage_change, label=bar_labels, color=bar_colors)
 plt.bar_label(bars, labels = percentage_change, label_type = 'center')
 plt.ylabel('Percentage Change')
-plt.title('Percentage Change in Stock Prices')
+plt.title('Percentage Change in Stock Prices over the last 2 years')
 #ax.legend(title='Stocks and Percentage Change')
 
 # S A V E _ A S _ I M A G E
