@@ -29,11 +29,9 @@ percentage_change = [(close_price - buy_price) / buy_price * 100 for close_price
 percentage_change = [round(change, 2) for change in percentage_change]
 
 
-#### V I S U A L I Z A T I O N _ O F _ S T O C K S
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 5), sharex=True)
-
-
-bars = ax1.bar(tickers, percentage_change, color = 'tab:blue')
+# Visualization of Stocks
+plt.figure(figsize = (10,6))
+bars = plt.bar(tickers, percentage_change, color = 'tab:blue')
 
 
 bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, percentage_change)]
