@@ -39,23 +39,22 @@ quantitiy_of_stocks = [1, 9, 11.3111, 10, 10, 5, 3, 19, 10]
 
 
 
-#### C A L C I L A T E _ P E R C E N T A G E _ C H A N G E
+#### C A L C U L A T E _ P E R C E N T A G E _ C H A N G E
 
 stock_close_price = df.iloc[-1, 1:].tolist()                                        # <- aktuelle schluss kurse der aktien ini tickers 
 percentage_change = [(close_price - buy_price) / buy_price * 100 for close_price, buy_price in zip(stock_close_price, stock_buy_price)]  # dreissatz nur 
 percentage_change = [round(change, 2) for change in percentage_change]              # runden auf 2 nach komma stellen
 
+
 sum_of_stocks = [price * quantity for price, quantity in zip(stock_close_price, quantitiy_of_stocks)]
-print(sum_of_stocks)
-#### C R E A T I O N _ O F _ P I E _ C H A R T
-
-sizes = [15, 30, 45, 10]
+print(stock_close_price)
 
 
-plt.pie(sum_of_stocks, labels=tickers)
-plt.show()
+
+
+
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(18, 10))
 
 
 bars = ax1.bar(tickers, percentage_change, color = 'tab:blue')
@@ -78,8 +77,13 @@ ax2.set_xlabel('Month_Year')
 ax2.set_ylabel('Stock Price')
 ax2.set_title('Stock Prices Over Time')
 
+#### C R E A T I O N _ O F _ P I E _ C H A R T
+plt.figure(figsize=(18,10))
+plt.title('Share risk distribution')
+plt.pie(sum_of_stocks, labels=tickers)
 
-
+pie_image_file_name = 'share_risk_distribution.png'
+plt.savefig(pie_image_file_name)
 
 # S A V E _ A S _ I M A G E
 

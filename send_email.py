@@ -27,6 +27,7 @@ close_df.reset_index(inplace=True)
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
 stock_buy_price = [110.96, 24.95, 11.47, 1.419, 47.81, 45.544, 159.95, 6.799474, 1.6198]
+quantitiy_of_stocks = [1, 9, 11.3111, 10, 10, 5, 3, 19, 10]
 
 #### C A L C I L A T E _ P E R C E N T A G E _ C H A N G E
 
@@ -34,6 +35,7 @@ stock_close_price = close_df.iloc[-1, 1:].tolist()
 percentage_change = [(close_price - buy_price) / buy_price * 100 for close_price, buy_price in zip(stock_close_price, stock_buy_price)]
 percentage_change = [round(change, 2) for change in percentage_change]
 
+sum_of_stocks = [price * quantity for price, quantity in zip(stock_close_price, quantitiy_of_stocks)]
 
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
 plt.figure(figsize = (10,6))
@@ -52,7 +54,15 @@ plt.title('Percentage Change in Stock Prices over the last 2 years')
 # S A V E _ A S _ I M A G E
 image_file_name = 'stock_prices.png'
 plt.savefig(image_file_name)
+
+plt.figure(figsize=(18,10))
+plt.title('Share risk distribution')
+plt.pie(sum_of_stocks, labels=tickers)
+
+pie_image_file_name = 'share_risk_distribution.png'
+plt.savefig(pie_image_file_name)
 plt.close()
+
 
 #### S E N D I N G _ E - M A I L ####
 
