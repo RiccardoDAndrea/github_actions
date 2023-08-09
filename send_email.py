@@ -38,30 +38,42 @@ percentage_change = [round(change, 2) for change in percentage_change]
 sum_of_stocks = [price * quantity for price, quantity in zip(stock_close_price, quantitiy_of_stocks)]
 
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
-plt.figure(figsize = (10,6))
-bars = plt.bar(tickers, percentage_change, color = 'tab:blue')
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(18, 10))
+
+
+bars = ax1.bar(tickers, percentage_change, color = 'tab:blue')
 
 
 bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, percentage_change)]
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
-plt.bar(tickers, percentage_change, label=bar_labels, color=bar_colors)
-plt.bar_label(bars, labels = percentage_change, label_type = 'center')
-plt.ylabel('Percentage Change')
-plt.title('Percentage Change in Stock Prices over the last 2 years')
-#ax.legend(title='Stocks and Percentage Change')
 
-# S A V E _ A S _ I M A G E
-image_file_name = 'stock_prices.png'
-plt.savefig(image_file_name)
+# F I R S T _ C H A R Tb
+ax1.bar(tickers, percentage_change, label=bar_labels, color=bar_colors)
+ax1.bar_label(bars, labels = percentage_change, label_type = 'center')
+ax1.set_ylabel('Percentage Change')
+ax1.set_title('Percentage Change in Stock Prices')
+#ax1.legend(title='Stocks and Percentage Change')
 
+for stock in tickers:
+    ax2.plot(close_df['Month_Year'], close_df[stock], label=stock)
+ax2.set_xlabel('Month_Year')
+ax2.set_ylabel('Stock Price')
+ax2.set_title('Stock Prices Over Time')
+
+#### C R E A T I O N _ O F _ P I E _ C H A R T
 plt.figure(figsize=(18,10))
 plt.title('Share risk distribution')
 plt.pie(sum_of_stocks, labels=tickers)
 
 pie_image_file_name = 'share_risk_distribution.png'
 plt.savefig(pie_image_file_name)
-plt.close()
+
+# S A V E _ A S _ I M A G E
+
+image_file_name = 'stock_prices.png'
+plt.savefig(image_file_name)
+plt.show()
 
 
 #### S E N D I N G _ E - M A I L ####
