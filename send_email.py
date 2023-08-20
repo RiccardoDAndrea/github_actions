@@ -71,7 +71,8 @@ ax3.set_xlabel('Month_Year')
 ax3.set_ylabel('Stock Price')
 ax3.set_title('Stock Prices Over Time')
 ax3.legend(title='Stocks and Percentage Change')
-
+line_chart_image_file_name = 'stock_prices.png'
+plt.savefig(line_chart_image_file_name)
 #### T H R I D _ P L O T _ C R E A T I O N _ O F _ P I E _ C H A R T -> Kuchen Diagramm 
 
 
@@ -105,10 +106,10 @@ message.attach(MIMEText(body, 'plain'))
 
 # A T T C H M E N T 
 
-with open(image_file_name, 'rb') as attachment:
-    part = MIMEImage(attachment.read(), name=image_file_name)
-    part.add_header('Content-Disposition', 'attachment', filename=image_file_name)
-    message.attach(part)
+with open(line_chart_image_file_name, 'rb') as attachment_line_chart:
+    part_1 = MIMEImage(attachment_line_chart.read(), name=line_chart_image_file_name)
+    part_1.add_header('Content-Disposition', 'attachment', filename=line_chart_image_file_name)
+    message.attach(part_1)
 
 # Attach the second image (pie chart)
 with open(pie_image_file_name, 'rb') as attachment_pie_chart:
