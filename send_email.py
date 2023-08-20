@@ -56,7 +56,7 @@ ax1.set_title('Percentage Change in Stock Prices')
 #ax1.legend(title='Stocks and Percentage Change')
 
 for stock in tickers:
-    ax2.plot(close_df['Month_Year'], close_df[stock], label=stock)
+    ax2.plot(close_df['Month_Year'], close_df[stock], label=stock)  
 ax2.set_xlabel('Month_Year')
 ax2.set_ylabel('Stock Price')
 ax2.set_title('Stock Prices Over Time')
