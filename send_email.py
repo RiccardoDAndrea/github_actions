@@ -99,7 +99,12 @@ message = MIMEMultipart()
 message['From'] = USERNAME
 message['To'] = USERNAME
 message['Subject'] = "GitHub Email Report"
-body = "Das ist eine automatisierte Mail mit einem Graphen der Schlusskurse der ausgewählten Aktien im Anhang."
+body = (
+    f"Das ist eine automatisierte Mail mit einem Graphen der Schlusskurse der ausgewählten Aktien im Anhang.\n"
+    f"Your share portfolio consists of the following shares: {tickers}\n"
+    f"You bought them at the following prices: {stock_buy_price}"
+)
+
 message.attach(MIMEText(body, 'plain'))
 
 # A T T C H M E N T 
