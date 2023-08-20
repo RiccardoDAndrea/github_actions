@@ -12,7 +12,6 @@ start_date = end_date - timedelta(days= 2 * 365)
 
 close_df = pd.DataFrame()
 
-
 # close_df.reset_index(inplace=True)
 
 df = pd.read_csv('close_data.csv')
@@ -29,6 +28,7 @@ currentHour = datetime.now().hour
 currentDay = datetime.now().day
 currentMonth = datetime.now().month
 currentYear = datetime.now().year
+
 
 #### P E R S O N A L _ S T O C K S ####
 
@@ -50,10 +50,8 @@ sum_of_stocks = [price * quantity for price, quantity in zip(stock_close_price, 
 print(stock_close_price)
 
 
-
-
-
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
+
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(18, 10))
 
 
@@ -64,12 +62,15 @@ bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, per
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
 
-# F I R S T _ C H A R Tb
+# F I R S T _ C H A R T
+
 ax1.bar(tickers, percentage_change, label=bar_labels, color=bar_colors)
 ax1.bar_label(bars, labels = percentage_change, label_type = 'center')
 ax1.set_ylabel('Percentage Change')
 ax1.set_title('Percentage Change in Stock Prices')
 #ax1.legend(title='Stocks and Percentage Change')
+
+# S E C O N D _ P L O T
 
 for stock in tickers:
     ax2.plot(df['Month_Year'], df[stock], label=stock)
@@ -78,6 +79,7 @@ ax2.set_ylabel('Stock Price')
 ax2.set_title('Stock Prices Over Time')
 
 #### C R E A T I O N _ O F _ P I E _ C H A R T
+
 plt.figure(figsize=(18,10))
 plt.title('Share risk distribution')
 plt.pie(sum_of_stocks, labels=tickers)
