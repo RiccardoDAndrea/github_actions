@@ -85,7 +85,7 @@ plt.savefig(pie_image_file_name)
 
 image_file_name = 'stock_prices.png'
 plt.savefig(image_file_name)
-plt.show()
+plt.close()
 
 #### S E N D I N G _ E - M A I L ####
 
