@@ -23,6 +23,11 @@ for ticker in tickers:
 
 close_df.reset_index(inplace=True)
 
+
+
+close_df['Date'] = pd.to_datetime(close_df['Date'])
+close_df['Month_Year'] = close_df['Date'].dt.to_period('M')
+close_df['Month_Year'] = close_df['Month_Year'].dt.to_timestamp()  # Konvertieren Sie die Period-Objekte in einen Zeitstempel.
 #### P E R S O N A L _ S T O C K S ####
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
@@ -57,10 +62,10 @@ ax2.set_xticklabels(tickers, rotation=45)
 ax2.set_title('Percentage Change in Stock Prices')
 
 # S E C O N D _ P L O T -> Linen Diagramm
+print(close_df)
 
 for ticker in tickers:
     ax3.plot(close_df['Month_Year'], close_df[ticker], label=ticker)
-
 ax3.set_xlabel('Month_Year')
 ax3.set_ylabel('Stock Price')
 ax3.set_title('Stock Prices Over Time')
