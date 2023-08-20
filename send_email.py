@@ -63,7 +63,6 @@ ax2.set_xticklabels(tickers, rotation=45)
 ax2.set_title('Percentage Change in Stock Prices')
 
 # S E C O N D _ P L O T -> Linen Diagramm
-print(close_df)
 
 for ticker in tickers:
     ax3.plot(close_df['Month_Year'], close_df[ticker], label=ticker)
@@ -73,6 +72,7 @@ ax3.set_title('Stock Prices Over Time')
 ax3.legend(title='Stocks and Percentage Change')
 line_chart_image_file_name = 'stock_prices.png'
 plt.savefig(line_chart_image_file_name)
+plt.close()
 #### T H R I D _ P L O T _ C R E A T I O N _ O F _ P I E _ C H A R T -> Kuchen Diagramm 
 
 
@@ -84,9 +84,7 @@ pie_image_file_name = 'share_risk_distribution.png'
 plt.savefig(pie_image_file_name)
 # S A V E _ A S _ I M A G E
 
-image_file_name = 'stock_prices.png'
-plt.savefig(image_file_name)
-plt.close()
+
 
 #### S E N D I N G _ E - M A I L ####
 
