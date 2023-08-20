@@ -71,6 +71,15 @@ ax3.set_ylabel('Stock Price')
 ax3.set_title('Stock Prices Over Time')
 ax3.legend(title='Stocks and Percentage Change')
 
+#### T H R I D _ P L O T _ C R E A T I O N _ O F _ P I E _ C H A R T -> Kuchen Diagramm 
+
+
+plt.figure(figsize=(15,8))
+plt.title('Share risk distribution')
+plt.pie(sum_of_stocks, labels=tickers)
+plt.tight_layout()
+pie_image_file_name = 'share_risk_distribution.png'
+plt.savefig(pie_image_file_name)
 # S A V E _ A S _ I M A G E
 
 image_file_name = 'stock_prices.png'
@@ -98,6 +107,11 @@ message.attach(MIMEText(body, 'plain'))
 with open(image_file_name, 'rb') as attachment:
     part = MIMEText(attachment.read(), 'png', _charset='utf-8')
     part.add_header('Content-Disposition', 'attachment', filename=image_file_name)
+    message.attach(part)
+
+with open(pie_image_file_name, 'rb') as attachment:
+    part = MIMEText(attachment.read(), 'png', _charset='utf-8')
+    part.add_header('Content-Disposition', 'attachment', filename=pie_image_file_name)
     message.attach(part)
 
 context = ssl.create_default_context()
