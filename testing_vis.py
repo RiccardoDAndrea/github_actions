@@ -18,7 +18,7 @@ df = pd.read_csv('close_data.csv')
 df['Date'] = pd.to_datetime(df['Date'])
 df['Month_Year'] = df['Date'].dt.to_period('M')
 df['Month_Year'] = df['Month_Year'].dt.to_timestamp()  # Konvertieren Sie die Period-Objekte in einen Zeitstempel.
-df['Month_Year'] = df['Month_Year'].apply(date2num) 
+#df['Month_Year'] = df['Month_Year'].apply(date2num) 
 
 # change datatype to date
 currentSecond= datetime.now().second
@@ -52,10 +52,10 @@ print(stock_close_price)
 
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
 
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(18, 10))
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(15, 8))
 
 
-bars = ax1.bar(tickers, percentage_change, color = 'tab:blue')
+bars = ax1.barh(tickers, percentage_change, color = 'tab:blue')
 
 
 bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, percentage_change)]
@@ -64,7 +64,7 @@ bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab
 
 # F I R S T _ C H A R T
 
-ax1.bar(tickers, percentage_change, label=bar_labels, color=bar_colors)
+ax1.barh(tickers, percentage_change, label=bar_labels, color=bar_colors)
 ax1.bar_label(bars, labels = percentage_change, label_type = 'center')
 ax1.set_ylabel('Percentage Change')
 ax1.set_title('Percentage Change in Stock Prices')
@@ -72,8 +72,9 @@ ax1.set_title('Percentage Change in Stock Prices')
 
 # S E C O N D _ P L O T
 
-for stock in tickers:
-    ax2.plot(df['Month_Year'], df[stock], label=stock)
+for ticker in tickers:
+    ax2.plot(df['Month_Year'], df[ticker], label=ticker)
+print(df)
 ax2.set_xlabel('Month_Year')
 ax2.set_ylabel('Stock Price')
 ax2.set_title('Stock Prices Over Time')
