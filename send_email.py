@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from matplotlib import pyplot as plt
 from io import BytesIO
-
+from email.mime.image import MIMEImage
 #### G E T _ S T O C K _ P R I C E S ####
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
@@ -104,15 +104,19 @@ message.attach(MIMEText(body, 'plain'))
 
 # A T T C H M E N T 
 
-with open(image_file_name, 'rb') as attachment:
-    part = MIMEText(attachment.read(), 'png', _charset='utf-8')
-    part.add_header('Content-Disposition', 'attachment', filename=image_file_name)
+with open('stock_prices_subplot.png', 'rb') as attachment:
+    part = MIMEImage(attachment.read(), name='stock_prices_subplot.png')
+    part.add_header('Content-Disposition', 'attachment', filename='stock_prices_subplot.png')
     message.attach(part)
 
-with open(pie_image_file_name, 'rb') as attachment_pie_chart:
-    part_2 = MIMEText(attachment_pie_chart.read(), 'png', _charset='utf-8')
-    part_2.add_header('Content-Disposition', 'attachment_pie_chart', filename=pie_image_file_name)
+# Attach the second image (pie chart)
+with open('share_risk_distribution.png', 'rb') as attachment_pie_chart:
+    part_2 = MIMEImage(attachment_pie_chart.read(), name='share_risk_distribution.png')
+    part_2.add_header('Content-Disposition', 'attachment', filename='share_risk_distribution.png')
     message.attach(part_2)
+
+
+
 
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
