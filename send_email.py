@@ -111,7 +111,7 @@ with open(image_file_name, 'rb') as attachment:
 
 with open(pie_image_file_name, 'rb') as attachment_pie_chart:
     part_2 = MIMEText(attachment_pie_chart.read(), 'png', _charset='utf-8')
-    part_2.add_header('Content-Disposition', 'attachment', filename=pie_image_file_name)
+    part_2.add_header('Content-Disposition', 'attachment_pie_chart', filename=pie_image_file_name)
     message.attach(part_2)
 
 context = ssl.create_default_context()
