@@ -109,8 +109,12 @@ with open(image_file_name, 'rb') as attachment:
     part.add_header('Content-Disposition', 'attachment', filename=image_file_name)
     message.attach(part)
 
+with open(pie_image_file_name, 'rb') as attachment:
+    part_2 = MIMEText(attachment.read(), 'png', _charset='utf-8')
+    part_2.add_header('Content-Disposition', 'attachment', filename=pie_image_file_name)
+    message.attach(part_2)
+
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
     server.login(USERNAME, PASSWORD)
     server.sendmail(USERNAME, USERNAME, message.as_string())
-
