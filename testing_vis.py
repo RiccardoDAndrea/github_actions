@@ -47,14 +47,11 @@ percentage_change = [round(change, 2) for change in percentage_change]          
 
 
 sum_of_stocks = [price * quantity for price, quantity in zip(stock_close_price, quantitiy_of_stocks)]
-print(stock_close_price)
 
-
+    
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(15, 8))
-
-
 bars = ax1.barh(tickers, percentage_change, color = 'tab:blue')
 
 
@@ -62,26 +59,35 @@ bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, per
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
 
-# F I R S T _ C H A R T
+# F I R S T _ C H A R T -> Säulen Diagram
+print('Your share portfolio consists of the following shares:' + str(tickers))
+print('You bought them at the following prices: :'+ str(stock_buy_price))
 
 ax1.barh(tickers, percentage_change, label=bar_labels, color=bar_colors)
 ax1.bar_label(bars, labels = percentage_change, label_type = 'center')
 ax1.set_ylabel('Percentage Change')
 ax1.set_title('Percentage Change in Stock Prices')
+
 #ax1.legend(title='Stocks and Percentage Change')
 
-# S E C O N D _ P L O T
+# S E C O N D _ P L O T -> Linen Diagramm
 
 for ticker in tickers:
     ax2.plot(df['Month_Year'], df[ticker], label=ticker)
-print(df)
+
 ax2.set_xlabel('Month_Year')
 ax2.set_ylabel('Stock Price')
 ax2.set_title('Stock Prices Over Time')
+ax2.legend()
 
-#### C R E A T I O N _ O F _ P I E _ C H A R T
 
-plt.figure(figsize=(18,10))
+
+
+
+
+#### T H R I D _ P L O T _ C R E A T I O N _ O F _ P I E _ C H A R T -> Kuchen Diagramm 
+
+plt.figure(figsize=(15,8))
 plt.title('Share risk distribution')
 plt.pie(sum_of_stocks, labels=tickers)
 
