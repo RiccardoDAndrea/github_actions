@@ -63,12 +63,17 @@ bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab
 print('Your share portfolio consists of the following shares:' + str(tickers))
 print('You bought them at the following prices: :'+ str(stock_buy_price))
 print(df)
-ax2.barh(tickers, percentage_change, label=bar_labels, color=bar_colors)
-ax2.bar_label(bars, labels = percentage_change, label_type = 'center')
-ax2.set_ylabel('Percentage Change')
-ax2.set_xticklabels(tickers, rotation=45)
-ax2.set_title('Percentage Change in Stock Prices')
 
+
+
+
+
+# Zweite Achse (Balkendiagramm)
+bars = ax2.barh(tickers, percentage_change, color=bar_colors)
+ax2.bar_label(bars, labels=bar_labels, label_type='center')
+ax2.set_xlabel('Percentage Change')
+ax2.set_xticklabels([])  # X-Achsenbeschriftungen entfernen
+ax2.set_title('Percentage Change in Stock Prices')
 # S E C O N D _ P L O T -> Linen Diagramm
 
 for ticker in tickers:
