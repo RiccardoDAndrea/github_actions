@@ -58,7 +58,7 @@ bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, per
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
 # F I R S T _ C H A R T -> Säulen Diagram
-last_week_data = close_df.tail(7)
+last_week_data = df.tail(7)
 
 # Daten der letzten Woche vorbereiten
 last_week_data['Date'] = pd.to_datetime(last_week_data['Date'])  # Konvertieren in Datetime-Objekte
@@ -113,4 +113,3 @@ plt.savefig(pie_image_file_name)
 image_file_name = 'stock_prices.png'
 plt.savefig(image_file_name)
 plt.show()
-

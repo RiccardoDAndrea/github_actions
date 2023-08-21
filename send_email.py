@@ -6,6 +6,7 @@ import yfinance as yf
 from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
 from matplotlib import pyplot as plt
 from io import BytesIO
 
@@ -80,7 +81,7 @@ ax2.set_title('Percentage Change over the last two years')
 
 
 # F O U R T H _ P L O T -> Linen Diagramm
-print(close_df)
+
 for ticker in tickers:
     ax4.plot(close_df['Month_Year'], close_df[ticker], label=ticker)
 ax4.set_xticklabels(close_df['Month_Year'].dt.strftime('%Y-%m') , rotation=45)
@@ -89,7 +90,8 @@ ax4.set_ylabel('Stock Price')
 ax4.set_title('Stock Prices Over the last two years')
 # ax4.legend(title='Stocks and Percentage Change')
 
-
+line_chart_image_file_name = 'line_chart_image_file_name.png'
+plt.savefig(line_chart_image_file_name)
 #### S E C O N D _ P L O T _ C R E A T I O N _ O F _ P I E _ C H A R T -> Kuchen Diagramm 
 
 plt.figure(figsize=(5,8))
@@ -104,7 +106,7 @@ plt.savefig(pie_image_file_name)
 
 image_file_name = 'stock_prices.png'
 plt.savefig(image_file_name)
-plt.close()
+plt.show()
 
 #### S E N D I N G _ E - M A I L ####
 
@@ -124,13 +126,18 @@ message.attach(MIMEText(body, 'plain'))
 
 # A T T C H M E N T 
 
-with open(image_file_name, 'rb') as attachment:
-    part = MIMEText(attachment.read(), 'png', _charset='utf-8')
-    part.add_header('Content-Disposition', 'attachment', filename=image_file_name)
-    message.attach(part)
+with open(line_chart_image_file_name, 'rb') as attachment_line_chart:
+    part_1 = MIMEImage(attachment_line_chart.read(), name=line_chart_image_file_name)
+    part_1.add_header('Content-Disposition', 'attachment', filename=line_chart_image_file_name)
+    message.attach(part_1)
+
+# Attach the second image (pie chart)
+with open(pie_image_file_name, 'rb') as attachment_pie_chart:
+    part_2 = MIMEImage(attachment_pie_chart.read(), name=pie_image_file_name)
+    part_2.add_header('Content-Disposition', 'attachment', filename=pie_image_file_name)
+    message.attach(part_2)
 
 context = ssl.create_default_context()
 with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
     server.login(USERNAME, PASSWORD)
     server.sendmail(USERNAME, USERNAME, message.as_string())
-
