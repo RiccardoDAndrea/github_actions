@@ -100,12 +100,12 @@ plt.pie(sum_of_stocks, labels=tickers)
 plt.tight_layout()
 # plt.legend(loc='upper left', bbox_to_anchor=(1, 1))  # Legende außerhalb des Diagramms platzieren
 pie_image_file_name = 'share_risk_distribution.png'
-plt.savefig(pie_image_file_name)
+plt.savefig(pie_image_file_name,dpi = 200)
 
 # S A V E _ A S _ I M A G E
 
 image_file_name = 'stock_prices.png'
-plt.savefig(image_file_name)
+plt.savefig(image_file_name, dpi = 200)
 plt.show()
 
 #### S E N D I N G _ E - M A I L ####
