@@ -59,7 +59,7 @@ bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab
 
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(18, 9))
 plt.subplots_adjust(wspace=0.3, hspace=0.6)  # Horizontale und vertikale Abstände anpassen
-
+plt.style.use('ggplot')
 # F I R S T _ C H A R T -> Säulen Diagram
 
 ax1.plot(last_week_dates, percentage_changes, marker='o')
@@ -68,7 +68,6 @@ ax1.set_xticklabels(last_week_dates, rotation=45)
 ax1.set_xlabel('Date')
 ax1.set_ylabel('Percentage Change')
 ax1.set_title('Stock Price Performance Last Week')
-ax1.legend(loc='best', mode='expand',ncol=3, bbox_to_anchor=(0,1,1,2))
 # S E C O N D _ P L O T -> Linen Diagramm
 
 bars = ax2.barh(tickers, percentage_change, color=bar_colors)
@@ -91,7 +90,8 @@ ax4.set_xticklabels(df['Month_Year'].dt.strftime('%Y-%m') , rotation=45)
 ax4.set_xlabel('Month_Year')
 ax4.set_ylabel('Stock Price')
 ax4.set_title('Stock Prices Over the last two years')
-plt.legend(loc='best', mode='expand',ncol=3, bbox_to_anchor=(0,1,1,2))
+plt.legend(loc='best', mode='expand',ncol=3, bbox_to_anchor=(0,1,1,2), fontsize='small')
+
 
 
 
