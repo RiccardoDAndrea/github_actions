@@ -26,7 +26,7 @@ close_df.reset_index(inplace=True)
 close_df['Date'] = pd.to_datetime(close_df['Date'])
 close_df['Month_Year'] = close_df['Date'].dt.to_period('M')
 close_df['Month_Year'] = close_df['Month_Year'].dt.to_timestamp()
-
+print(close_df.tail())
 #### P E R S O N A L _ S T O C K S ####
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
@@ -126,6 +126,7 @@ image_file_name = 'stock_prices.png'
 plt.savefig(image_file_name)
 plt.show()
 
+
 #### S E N D I N G _ E - M A I L ####
 
 port = 465
@@ -142,10 +143,11 @@ message['Subject'] = "GitHub Email Report"
 body = f"""Good day users,
 Here is your weekly report on your stocks.
 Your stock portfolio consists of the following stocks: 
+{tickers}
 They bought them at the following prices: 
-The last closing prices were as follows:"""
+{stock_buy_price}
+The last closing prices were as follows:{close_df.tail()}"""
 message.attach(MIMEText(body, 'plain'))
-
 # A T T C H M E N T 
 
 with open(line_chart_image_file_name, 'rb') as attachment_line_chart:
