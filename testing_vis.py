@@ -79,6 +79,7 @@ ax2.set_title('Percentage Change over the last two years')
 
 # T H I R D _ P L O T -> Linen Diagramm
 
+ax3.pie(sum_of_stocks, labels=tickers)
 
 
 
