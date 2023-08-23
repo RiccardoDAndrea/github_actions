@@ -143,17 +143,25 @@ message['Subject'] = "GitHub Email Report"
 body = f"""
 Good day users,
 
-Here is your weekly report on your stocks.
+Here is your <strong>weekly report</strong> on your stocks.
 
 Your stock portfolio consists of the following stocks: 
 {', '.join(tickers)}
 
-They were bought at the following prices: 
+They were <strong>bought at the following prices:</strong> 
 {', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
 
-The last closing prices were as follows:
+<strong>The last closing prices were as follows:</strong>
 {close_df.tail().to_string()}
 """
+
+
+
+
+
+
+
+
 message.attach(MIMEText(body, 'plain'))
 # A T T C H M E N T 
 
