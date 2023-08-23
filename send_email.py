@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 from matplotlib import pyplot as plt
 from io import BytesIO
-
+import markdown2
 #### G E T _ S T O C K _ P R I C E S ####
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
@@ -26,7 +26,7 @@ close_df.reset_index(inplace=True)
 close_df['Date'] = pd.to_datetime(close_df['Date'])
 close_df['Month_Year'] = close_df['Date'].dt.to_period('M')
 close_df['Month_Year'] = close_df['Month_Year'].dt.to_timestamp()
-
+print(close_df.tail())
 #### P E R S O N A L _ S T O C K S ####
 
 tickers = ['AAPL', 'BYDDF', 'EONGY', 'LNVGF', 'NIO', 'PLUN.F', 'TSLA', 'TKA.DE', 'XIACF']
@@ -144,12 +144,37 @@ message['Subject'] = "GitHub Email Report"
 html_table = close_df.tail().to_html(index=False, classes='table', border=1)
 
 # Generieren des formatierten Texts mit Sternchen für Fettdruck
-welcome_text = "Good day users,\nHere is your *weekly report* on your stocks."
-portfolie = f"'''Your stock portfolio consists of the following stocks:'''\n{', '.join(tickers)}"
+body = f"""
+Good day users,Here is your *weekly report* on your stocks.
 
-buy_prices_info = f"They were *bought at the following prices:*\n{', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}"
-closing_prices = f"The last closing prices were as follows:\n{html_table}"
-body = welcome_text + "\n" + portfolie + "\n" + buy_prices_info + "\n" + closing_prices
+Your stock portfolio consists of the following stocks: 
+{', '.join(tickers)}
+
+They were *bought at the following prices:* 
+{', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
+
+The last closing prices were as follows:
+{html_table}
+"""
+
+
+# Ihr Markdown-Text
+markdown_text = """
+# Good day users,
+Here is your *weekly report* on your stocks.
+
+## Your stock portfolio consists of the following stocks:
+{', '.join(tickers)}
+
+## They were *bought at the following prices:* 
+{', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
+
+## The last closing prices were as follows:
+{html_table}
+"""
+
+# Markdown in HTML umwandeln
+html_text = markdown2.markdown(markdown_text)
 
 
 
@@ -157,9 +182,7 @@ body = welcome_text + "\n" + portfolie + "\n" + buy_prices_info + "\n" + closing
 
 
 
-
-
-message.attach(MIMEText(body, 'plain'))
+message.attach(MIMEText(html_text, 'plain'))
 # A T T C H M E N T 
 
 with open(line_chart_image_file_name, 'rb') as attachment_line_chart:
