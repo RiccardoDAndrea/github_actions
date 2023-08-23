@@ -158,31 +158,7 @@ The last closing prices were as follows:
 """
 
 
-# Ihr Markdown-Text
-markdown_text = """
-# Good day users,
-Here is your *weekly report* on your stocks.
-
-## Your stock portfolio consists of the following stocks:
-{', '.join(tickers)}
-
-## They were *bought at the following prices:* 
-{', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
-
-## The last closing prices were as follows:
-{html_table}
-"""
-
-# Markdown in HTML umwandeln
-html_text = markdown2.markdown(markdown_text)
-
-
-
-
-
-
-
-message.attach(MIMEText(html_text, 'plain'))
+message.attach(MIMEText(body, 'plain'))
 # A T T C H M E N T 
 
 with open(line_chart_image_file_name, 'rb') as attachment_line_chart:
