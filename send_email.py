@@ -140,13 +140,20 @@ message = MIMEMultipart()
 message['From'] = USERNAME
 message['To'] = USERNAME
 message['Subject'] = "GitHub Email Report"
-body = f"""Good day users,
+body = f"""
+Good day users,
+
 Here is your weekly report on your stocks.
+
 Your stock portfolio consists of the following stocks: 
-{tickers}
-They bought them at the following prices: 
-{stock_buy_price}
-The last closing prices were as follows:{close_df.tail()}"""
+{', '.join(tickers)}
+
+They were bought at the following prices: 
+{', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
+
+The last closing prices were as follows:
+{close_df.tail().to_string()}
+"""
 message.attach(MIMEText(body, 'plain'))
 # A T T C H M E N T 
 
