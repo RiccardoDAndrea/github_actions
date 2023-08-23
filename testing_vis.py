@@ -56,8 +56,8 @@ bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, per
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
-
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(18, 9))
+fig.suptitle('Gemeinsame Überschrift', fontsize=16, y=0.98, x=0.29)
 plt.subplots_adjust(wspace=0.3, hspace=0.6)  # Horizontale und vertikale Abstände anpassen
 plt.style.use('ggplot')
 # F I R S T _ C H A R T -> Säulen Diagram
@@ -70,15 +70,22 @@ ax1.set_ylabel('Percentage Change')
 ax1.set_title('Stock Price Performance Last Week')
 # S E C O N D _ P L O T -> Linen Diagramm
 
-bars = ax2.barh(tickers, percentage_change, color=bar_colors)
-ax2.bar_label(bars, labels=bar_labels, label_type='center')
+# Daten in aufsteigender Reihenfolge sortieren (größte positive Änderung oben)
+sorted_indices = sorted(range(len(percentage_change)), key=lambda k: percentage_change[k])
+sorted_tickers = [tickers[i] for i in sorted_indices]
+sorted_percentage_change = [percentage_change[i] for i in sorted_indices]
+sorted_bar_labels = [bar_labels[i] for i in sorted_indices]
+
+# Balkendiagramm erstellen
+bars = ax2.barh(sorted_tickers, sorted_percentage_change, color=bar_colors)
+ax2.bar_label(bars, labels=sorted_bar_labels, label_type='center')
 ax2.set_xlabel('Percentage Change')
 # X-Achsenbeschriftungen entfernen
 ax2.set_xticklabels([], rotation=45)
 ax2.set_title('Percentage Change over the last two years')
 
 # T H I R D _ P L O T -> Linen Diagramm
-
+ax3.set_title('Share risk distribution')
 ax3.pie(sum_of_stocks, labels=tickers)
 
 
@@ -99,7 +106,6 @@ plt.legend(loc='best', mode='expand',ncol=3, bbox_to_anchor=(0,1,1,2), fontsize=
 #### S E C O N D _ P L O T _ C R E A T I O N _ O F _ P I E _ C H A R T -> Kuchen Diagramm 
 
 plt.figure(figsize=(5,8))
-plt.title('Share risk distribution')
 plt.pie(sum_of_stocks, labels=tickers)
 plt.tight_layout()
 pie_image_file_name = 'share_risk_distribution.png'
