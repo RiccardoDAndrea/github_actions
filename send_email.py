@@ -144,18 +144,24 @@ message['Subject'] = "GitHub Email Report"
 html_table = close_df.tail().to_html(index=False, classes='table', border=1)
 
 # Generieren des formatierten Texts mit Sternchen für Fettdruck
+last_closing_prices = close_df.tail()
+
 body = f"""
-Good day users,Here is your *weekly report* on your stocks.
+Good day users,
+
+Here is your weekly report on your stocks.
 
 Your stock portfolio consists of the following stocks: 
 {', '.join(tickers)}
 
-They were *bought at the following prices:* 
+They were bought at the following prices:
 {', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
 
 The last closing prices were as follows:
-{html_table}
+
+{last_closing_prices.to_string(index=False, line_width=100, justify='center')}
 """
+
 
 
 message.attach(MIMEText(body, 'plain'))
