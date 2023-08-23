@@ -143,16 +143,16 @@ message['Subject'] = "GitHub Email Report"
 body = f"""
 Good day users,
 
-Here is your <strong>weekly report</strong> on your stocks.
+Here is your *weekly report* on your stocks.
 
 Your stock portfolio consists of the following stocks: 
 {', '.join(tickers)}
 
-They were <strong>bought at the following prices:</strong> 
+They were *bought at the following prices:* 
 {', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
 
-<strong>The last closing prices were as follows:</strong>
-{close_df.tail().to_string()}
+The last closing prices were as follows:
+{close_df.tail().to_string(index=False)}  # Hier wird der Index entfernt
 """
 
 
