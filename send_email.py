@@ -140,6 +140,10 @@ message = MIMEMultipart()
 message['From'] = USERNAME
 message['To'] = USERNAME
 message['Subject'] = "GitHub Email Report"
+# DataFrame als HTML-Tabelle mit Gitterlinien formatieren
+html_table = close_df.tail().to_html(index=False, classes='table', border=1)
+
+# Generieren des formatierten Texts mit Sternchen für Fettdruck
 body = f"""
 Good day users,
 
@@ -152,7 +156,7 @@ They were *bought at the following prices:*
 {', '.join([f'{ticker}: ${price:.2f}' for ticker, price in zip(tickers, stock_buy_price)])}
 
 The last closing prices were as follows:
-{close_df.tail().to_string(index=False)}  # Hier wird der Index entfernt
+{html_table}
 """
 
 
