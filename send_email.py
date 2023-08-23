@@ -144,7 +144,7 @@ message['Subject'] = "GitHub Email Report"
 html_table = close_df.tail().to_html(index=False, classes='table', border=1)
 
 # Generieren des formatierten Texts mit Sternchen für Fettdruck
-last_closing_prices = close_df.tail()
+last_closing_prices = close_df.tail().round(2)
 
 body = f"""
 Good day users,
