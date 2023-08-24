@@ -119,7 +119,7 @@ plt.figure(figsize=(5,8))
 plt.pie(sum_of_stocks, labels=tickers)
 plt.tight_layout()
 pie_image_file_name = 'share_risk_distribution.png'
-plt.savefig(pie_image_file_name)
+fig.savefig(pie_image_file_name)
 
 # S A V E _ A S _ I M A G E
 
