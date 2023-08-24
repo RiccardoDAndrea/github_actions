@@ -123,8 +123,8 @@ plt.savefig(pie_image_file_name)
 
 # S A V E _ A S _ I M A G E
 
-image_file_name = 'stock_prices.png'
-plt.savefig(image_file_name)
+line_chart_image_file_name = 'stock_prices.png'
+plt.savefig(line_chart_image_file_name)
 plt.show()
 
 
