@@ -123,9 +123,9 @@ plt.savefig(pie_image_file_name)
 
 # S A V E _ A S _ I M A G E
 
-line_chart_image_file_name = 'stock_prices.png'
-plt.savefig(line_chart_image_file_name)
-plt.show()
+image_file_name = 'stock_prices.png'
+plt.savefig(image_file_name)
+plt.close()
 
 
 #### S E N D I N G _ E - M A I L ####
@@ -168,9 +168,9 @@ The last closing prices were as follows:
 message.attach(MIMEText(body, 'plain'))
 # A T T C H M E N T 
 
-with open(line_chart_image_file_name, 'rb') as attachment_line_chart:
-    part_1 = MIMEImage(attachment_line_chart.read(), name=line_chart_image_file_name)
-    part_1.add_header('Content-Disposition', 'attachment', filename=line_chart_image_file_name)
+with open(image_file_name, 'rb') as attachment_line_chart:
+    part_1 = MIMEImage(attachment_line_chart.read(), name=image_file_name)
+    part_1.add_header('Content-Disposition', 'attachment', filename=image_file_name)
     message.attach(part_1)
 
 # Attach the second image (pie chart)
