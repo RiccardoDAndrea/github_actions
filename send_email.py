@@ -52,7 +52,7 @@ bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, per
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
 #### V I S U A L I Z A T I O N _ O F _ S T O C K S
-plt.style.use('seaborn')
+plt.style.use('ggplot')
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(18, 9))
 fig.suptitle('Stock performance Overview', fontsize=16, y=0.98, x=0.29)
 plt.subplots_adjust(wspace=0.3, hspace=0.6)  # Horizontale und vertikale Abstände anpassen
