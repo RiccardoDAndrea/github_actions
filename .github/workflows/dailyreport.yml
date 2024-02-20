@@ -23,4 +23,4 @@ jobs:
         env:
           USER_EMAIL: ${{ secrets.USER_EMAIL }}
           USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-        run: python send_email.py
+        run: python Scripts/send_email.py
