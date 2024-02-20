@@ -16,7 +16,8 @@ close_df = pd.DataFrame()
 
 # close_df.reset_index(inplace=True)
 
-df = pd.read_csv('close_data.csv')
+df = pd.read_csv('Dataset/close_data.csv')
+print(df)
 df['Date'] = pd.to_datetime(df['Date'])
 df['Month_Year'] = df['Date'].dt.to_period('M')
 df['Month_Year'] = df['Month_Year'].dt.to_timestamp()  # Konvertieren Sie die Period-Objekte in einen Zeitstempel.
