@@ -20,15 +20,6 @@ The Yahoo Finance API is integrated into the VM to fetch real-time stock data. T
 
 Additionally, the VM is designed to generate visualizations depicting the weekly performance of the selected stocks. These visualizations provide users with a graphical representation of how the stocks have fared over time.
 
-## Usage
-
-To utilize this VM:
-
-1. Ensure you have the necessary dependencies installed, including Python and the required libraries.
-2. Set up the VM according to the provided instructions.
-3. Configure the email settings to match your preferences, including the recipient's email address and any custom message.
-4. Schedule the VM to run every Friday at 12:00 PM.
-
 ## Contributions
 
 Contributions to this project are welcome! If you have any suggestions for improvements or would like to add new features, feel free to submit a pull request.
