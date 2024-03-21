@@ -1,5 +1,5 @@
 # Stock Overview Virtual Machine
-#
+
 This repository hosts the setup for a virtual machine (VM) dedicated to providing weekly stock overviews. The primary objectives are:
 
 1. **Email Delivery**: Send an email every Friday at 12:00 PM containing an overview of randomly chosen stocks along with their performance.
