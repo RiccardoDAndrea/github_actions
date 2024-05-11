@@ -42,12 +42,15 @@ percentage_change = [round(change, 2) for change in percentage_change]
 sum_of_stocks = [price * quantity for price, quantity in zip(stock_close_price, quantitiy_of_stocks)]
 last_week_data = close_df.tail(7)
 
-
 # Daten der letzten Woche vorbereiten
 last_week_data['Date'] = pd.to_datetime(last_week_data['Date'])  # Konvertieren in Datetime-Objekte
 last_week_dates = last_week_data['Date'].dt.strftime('%Y-%m-%d')  # Datum formatieren
 percentage_changes = (last_week_data.iloc[:, 1:-1] / last_week_data.iloc[:, 1:-1].shift(1) - 1) * 100    
+last_week_data.fillna(0, inplace=True)
 
+print('#######################')
+print(last_week_dates)
+print('#######################')
 bar_labels = [f"{ticker} ({change:.2f}%)" for ticker, change in zip(tickers, percentage_change)]
 bar_colors = ['tab:red', 'tab:blue', 'tab:green', 'tab:orange', 'tab:gray', 'tab:cyan', 'tab:purple', 'tab:pink', 'tab:brown']
 
